@@ -21,12 +21,12 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    vendor = models.CharField(max_length=255, unique=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.TextField(blank=True)
-    available = models.BooleanField(default=False)
-    preview = models.ImageField(upload_to='images/', blank=True)
+    title = models.CharField('Название', max_length=255)
+    vendor = models.CharField('Артикул', max_length=255, unique=True)
+    price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
+    description = models.TextField('Описание', blank=True)
+    available = models.BooleanField('Наличие', default=False)
+    preview = models.ImageField('Предпросмотр', upload_to='images/', blank=True)
     color = models.ManyToManyField(to='product.Color', verbose_name='Цвет', related_name='product_colors')
 
     def __str__(self):
@@ -77,8 +77,8 @@ class Color(models.Model):
 
 
 class Additional(models.Model):
-    key = models.CharField(max_length=250, blank=True)
-    value = models.CharField(max_length=250, blank=True)
+    key = models.CharField('Ключ', max_length=250, blank=True)
+    value = models.CharField('Значение', max_length=250, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='additional')
 
     class Meta:
@@ -87,7 +87,7 @@ class Additional(models.Model):
 
 
 class Size(models.Model):
-    size = models.CharField(max_length=10, blank=True)
+    size = models.CharField('Размер', max_length=10, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_size')
 
     class Meta:

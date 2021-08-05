@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
+from django.contrib.auth.models import Group
+
 from .models import Category, Product, Color, Bag, Additional, Size, Favorite
 
 
@@ -36,3 +38,4 @@ admin.site.register(Bag)
 admin.site.register(Additional, AdditionalAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Favorite)
+admin.site.unregister(Group)

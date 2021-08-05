@@ -15,8 +15,8 @@ class Category(models.Model):
             return f"{self.parent} --> {self.name}"
 
     class Meta:
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class Product(models.Model):
@@ -32,6 +32,10 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.category}-->{self.title}"
 
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+
 
 class Bag(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bag')
@@ -42,6 +46,10 @@ class Bag(models.Model):
     def __str__(self):
         return {self.user}
 
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзина'
+
 
 class Favorite(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='favorites')
@@ -51,6 +59,10 @@ class Favorite(models.Model):
     def __str__(self):
         return {self.user}
 
+    class Meta:
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранное'
+
 
 class Color(models.Model):
     title = models.CharField(verbose_name='Название цвета', max_length=256)
@@ -59,13 +71,25 @@ class Color(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Цвет'
+        verbose_name_plural = 'Цвет'
+
 
 class Additional(models.Model):
     key = models.CharField(max_length=250, blank=True)
     value = models.CharField(max_length=250, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='additional')
 
+    class Meta:
+        verbose_name = 'Дополнительная информация'
+        verbose_name_plural = 'Дополнительная информация'
+
 
 class Size(models.Model):
     size = models.CharField(max_length=10, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_size')
+
+    class Meta:
+        verbose_name = 'Размер'
+        verbose_name_plural = 'Размеры'

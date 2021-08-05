@@ -7,8 +7,8 @@ class About(models.Model):
     description2 = models.TextField()
 
     class Meta:
-        verbose_name = 'About us'
-        verbose_name_plural = 'About us'
+        verbose_name = 'О нас'
+        verbose_name_plural = 'О нас'
 
     def __str__(self):
         return self.logo
@@ -20,8 +20,8 @@ class Image(models.Model):
     about = models.ForeignKey(About, on_delete=models.CASCADE, related_name='images')
 
     class Meta:
-        verbose_name = 'image'
-        verbose_name_plural = 'images'
+        verbose_name = 'Картинка'
+        verbose_name_plural = 'Картинки'
 
     @staticmethod
     def generate_name():

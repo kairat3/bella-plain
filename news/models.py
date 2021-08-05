@@ -8,8 +8,8 @@ class News(models.Model):
     date = models.DateField(auto_now_add=True)
 
     class Meta:
-        verbose_name = 'News'
-        verbose_name_plural = 'News'
+        verbose_name = 'О нас'
+        verbose_name_plural = 'О нас'
 
     def __str__(self):
         return self.title

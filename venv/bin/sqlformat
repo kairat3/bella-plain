@@ -1,4 +1,4 @@
-#!/home/zh_kairat3/bella/venv/bin/python3
+#!/home/ka/pycharm/sunrise/bella2/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -4,7 +4,7 @@ from account.models import CustomUser
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField('Категория', max_length=150)
     slug = models.SlugField(unique=True, blank=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 

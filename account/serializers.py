@@ -9,10 +9,11 @@ User = get_user_model()
 
 class RegisterApiSerializer(serializers.ModelSerializer, TokenObtainPairSerializer):
     password2 = serializers.CharField(min_length=6, required=True, write_only=True)
+    access2 = serializers.CharField(min_length=6, read_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'phone_number', 'password', 'password2', 'first_name', 'last_name', )
+        fields = ('access2', 'id', 'phone_number', 'password', 'password2', 'first_name', 'last_name', )
 
     def validate(self, attrs):
         password2 = attrs.pop('password2')
@@ -22,11 +23,13 @@ class RegisterApiSerializer(serializers.ModelSerializer, TokenObtainPairSerializ
             raise serializers.ValidationError('Password must contain alpha and numbers')
         phone_number = attrs.get('phone_number')
         user = authenticate(username=phone_number, password=password2)
+        # refresh = self.get_token(phone_number)
+        # access2 = refresh.access_token
+        print(attrs.popitem)
         return attrs
 
     def to_representation(self, instance):
         representation = super(RegisterApiSerializer, self).to_representation(instance)
-        print(representation)
         refresh = self.get_token(instance)
         representation['refresh'] = str(refresh)
         representation['access'] = str(refresh.access_token)
@@ -34,7 +37,7 @@ class RegisterApiSerializer(serializers.ModelSerializer, TokenObtainPairSerializ
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
-        print(user)
+        # print(user)
         return user
 
 

@@ -4,13 +4,14 @@ from account.models import CustomUser
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField('Категория', max_length=150)
     slug = models.SlugField(unique=True, blank=True)
+    image = models.ImageField('Предпросмотр', upload_to='images/', blank=True)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
 
     def __str__(self):
         if not self.parent:
-            return f"Category: {self.name}"
+            return f"Категория: {self.name}"
         else:
             return f"{self.parent} --> {self.name}"
 
@@ -20,7 +21,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category,verbose_name='Категория', related_name='category', on_delete=models.CASCADE)
     title = models.CharField('Название', max_length=255)
     vendor = models.CharField('Артикул', max_length=255, unique=True)
     price = models.DecimalField('Цена', max_digits=10, decimal_places=2)

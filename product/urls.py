@@ -8,3 +8,4 @@ urlpatterns = [
     path('bag/', views.BagListView.as_view()),
     path('bag/checkout/', views.BagCreateView.as_view()),
 ]
+    
